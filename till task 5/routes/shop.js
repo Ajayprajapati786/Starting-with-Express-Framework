@@ -9,18 +9,15 @@ router.get('/',(req,res,next)=>{
     res.sendFile(path.join(rootDir,'views','shop.html'));
 })
 
-router.get('/contact',(req,res,next)=>{
-    res.sendFile(path.join(rootDir,'views','contact.html'))
-  })
+const contactsController = require('../controllers/products')
 
-  router.get('/success',(req,res,next)=>{
-    res.sendFile(path.join(rootDir,'views','success.html'))
-  })
 
-  router.post("/contact", (req, res, next) => {
-    console.log("contact route accessed");
-    console.log(req.body);
-    res.redirect("/success");
-  });
+router.get('/contact',contactsController.getContact)
+
+  router.post("/contact", contactsController.postContact);
+
+  router.get('/success',contactsController.getSuccess)
+
 
 module.exports = router;
+
